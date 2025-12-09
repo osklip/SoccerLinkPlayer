@@ -147,6 +147,55 @@ namespace SoccerLinkPlayer.Services
             return rows;
         }
 
+        public async Task<List<Wiadomosc>> GetMessagesForPlayerAsync(int playerId)
+        {
+            // Pobieramy wiadomości, gdzie odbiorcą jest nasz zawodnik (playerId),
+            // a nadawcą jest Trener. Sortujemy od najnowszych.
+            var sql = @"
+            SELECT 
+                WiadomoscID, 
+                TypNadawcy, 
+                NadawcaID, 
+                OdbiorcaID, 
+                Tresc, 
+                DataWyslania, 
+                Temat
+            FROM Wiadomosc 
+            WHERE OdbiorcaID = ? AND TypNadawcy = 'Trener'
+            ORDER BY DataWyslania DESC";
+
+            try
+            {
+                // Przekazujemy ID zalogowanego zawodnika jako parametr
+                var rows = await ExecuteSqlAsync(sql, new object[] { playerId });
+                var messages = new List<Wiadomosc>();
+
+                foreach (var row in rows)
+                {
+                    if (row == null) continue;
+
+                    messages.Add(new Wiadomosc
+                    {
+                        WiadomoscID = int.Parse(row[0] ?? "0"),
+                        TypNadawcy = row[1],
+                        NadawcaID = int.Parse(row[2] ?? "0"),
+                        OdbiorcaID = int.Parse(row[3] ?? "0"),
+                        Tresc = row[4],
+                        // Parsowanie daty z formatu tekstowego (np. "2023-12-01 14:30:00")
+                        DataWyslania = DateTime.TryParse(row[5], out var date) ? date : DateTime.MinValue,
+                        Temat = row[6]
+                    });
+                }
+
+                return messages;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Błąd pobierania wiadomości: {ex.Message}");
+                return new List<Wiadomosc>(); // Zwracamy pustą listę w razie błędu
+            }
+        }
+
         // --- Klasy DTO do mapowania JSON z Turso API ---
 
         private class TursoPipelineRequest

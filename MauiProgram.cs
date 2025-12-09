@@ -22,6 +22,7 @@ namespace SoccerLinkPlayer
             // Rejestracja stron
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<MainPage>();
+            builder.Services.AddTransient<MessagesPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();

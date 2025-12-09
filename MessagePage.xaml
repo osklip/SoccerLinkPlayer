@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SoccerLinkPlayer.MessagesPage"
+             Title="Wiadomości"
+             BackgroundColor="{StaticResource Gray100}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Odśwież" Clicked="OnRefreshClicked" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto, *">
+        <Label Grid.Row="0" 
+               Text="Skrzynka odbiorcza" 
+               FontSize="20" 
+               FontAttributes="Bold" 
+               Margin="20,20,20,10"
+               TextColor="{StaticResource Black}"/>
+
+        <CollectionView Grid.Row="1" x:Name="MessagesCollectionView" Margin="10">
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label Text="Brak wiadomości od trenera." TextColor="{StaticResource Gray500}" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="0,5" Padding="15" CornerRadius="10" HasShadow="True" BackgroundColor="White" BorderColor="Transparent">
+                        <VerticalStackLayout Spacing="5">
+
+                            <Grid ColumnDefinitions="*, Auto">
+                                <Label Grid.Column="0" 
+                                       Text="{Binding Temat}" 
+                                       FontAttributes="Bold" 
+                                       FontSize="16" 
+                                       TextColor="{StaticResource Primary}"/>
+
+                                <Label Grid.Column="1" 
+                                       Text="{Binding DataWyslania, StringFormat='{0:dd.MM.yyyy}'}" 
+                                       FontSize="12" 
+                                       TextColor="{StaticResource Gray500}"/>
+                            </Grid>
+
+                            <Label Text="Od: Trener" 
+                                   FontSize="12" 
+                                   TextColor="{StaticResource Gray500}"
+                                   FontAttributes="Italic"/>
+
+                            <Label Text="{Binding Tresc}" 
+                                   FontSize="14" 
+                                   TextColor="{StaticResource Black}" 
+                                   LineBreakMode="WordWrap"/>
+
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <ActivityIndicator Grid.Row="1" x:Name="LoadingIndicator" IsRunning="False" IsVisible="False" VerticalOptions="Center" HorizontalOptions="Center" Color="{StaticResource Primary}"/>
+    </Grid>
+
+</ContentPage>

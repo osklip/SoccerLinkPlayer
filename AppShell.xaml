@@ -10,11 +10,21 @@
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate local:LoginPage}"
-        Route="LoginPage" />
+        Route="LoginPage"
+        Shell.TabBarIsVisible="False" />
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent
+            Title="Pulpit"
+            Icon="dotnet_bot.png" 
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />
+
+        <ShellContent
+            Title="Wiadomości"
+            Icon="dotnet_bot.png" 
+            ContentTemplate="{DataTemplate local:MessagesPage}"
+            Route="MessagesPage" />
+    </TabBar>
 
 </Shell>
