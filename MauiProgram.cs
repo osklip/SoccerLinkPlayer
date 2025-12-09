@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using SoccerLinkPlayer.Services;
 
 namespace SoccerLinkPlayer
 {
@@ -15,8 +16,15 @@ namespace SoccerLinkPlayer
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            // Rejestracja serwisów
+            builder.Services.AddSingleton<DatabaseService>();
+
+            // Rejestracja stron
+            builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<MainPage>();
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

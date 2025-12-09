@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SoccerLinkPlayer.LoginPage"
+             Title="Logowanie"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource White}">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="30" VerticalOptions="Center">
+
+            <Label Text="SoccerLink Player"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource Primary}"
+                   HorizontalOptions="Center"
+                   Margin="0,50,0,30"/>
+
+            <Frame BorderColor="{StaticResource Gray200}"
+                   Padding="0"
+                   CornerRadius="8"
+                   HasShadow="False">
+                <Entry x:Name="EmailEntry"
+                       Placeholder="Adres e-mail"
+                       Keyboard="Email"
+                       Margin="10,0"
+                       TextColor="{StaticResource Black}"
+                       PlaceholderColor="{StaticResource Gray400}"/>
+            </Frame>
+
+            <Frame BorderColor="{StaticResource Gray200}"
+                   Padding="0"
+                   CornerRadius="8"
+                   HasShadow="False">
+                <Entry x:Name="PasswordEntry"
+                       Placeholder="Hasło"
+                       IsPassword="True"
+                       Margin="10,0"
+                       TextColor="{StaticResource Black}"
+                       PlaceholderColor="{StaticResource Gray400}"/>
+            </Frame>
+
+            <Button x:Name="LoginButton"
+                    Text="ZALOGUJ SIĘ"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="{StaticResource White}"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    FontAttributes="Bold"
+                    Margin="0,20,0,0"
+                    Clicked="OnLoginClicked"/>
+
+            <Label Text="Zapomniałeś hasła?"
+                   TextColor="{StaticResource Gray500}"
+                   HorizontalOptions="Center"
+                   TextDecorations="Underline">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnForgotPasswordTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
