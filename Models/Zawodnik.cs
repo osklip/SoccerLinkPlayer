@@ -2,7 +2,7 @@
 
 public class Zawodnik
 {
-    public int Id { get; set; }
+    public int ZawodnikID { get; set; }
     public string AdresEmail { get; set; }
     public string Haslo { get; set; }
     public string NumerTelefonu { get; set; }

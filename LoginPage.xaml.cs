@@ -33,7 +33,7 @@ public partial class LoginPage : ContentPage
             if (zawodnik != null)
             {
                 // Zapisujemy dane sesji
-                Preferences.Set("LoggedUserId", zawodnik.Id);
+                Preferences.Set("LoggedUserId", zawodnik.ZawodnikID);
                 Preferences.Set("LoggedUserName", $"{zawodnik.Imie} {zawodnik.Nazwisko}");
                 Preferences.Set("LoggedUserTeam", "FC Or³y"); // Przyk³adowo, jeœli nie ma tego w tabeli
 
