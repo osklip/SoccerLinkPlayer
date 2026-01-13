@@ -32,13 +32,17 @@ public partial class LoginPage : ContentPage
 
             if (zawodnik != null)
             {
-                // Zapisujemy dane sesji
+                // DEBUG: Sprawdzamy co przysz³o z bazy
+                System.Diagnostics.Debug.WriteLine($"[LOGIN SUCCESS] ID: {zawodnik.ZawodnikID}, TrenerID: {zawodnik.TrenerID}");
+
+                // ZAPISUJEMY DANE SESJI
                 Preferences.Set("LoggedUserId", zawodnik.ZawodnikID);
                 Preferences.Set("LoggedUserName", $"{zawodnik.Imie} {zawodnik.Nazwisko}");
-                Preferences.Set("LoggedUserTeam", "FC Or³y"); // Przyk³adowo, jeœli nie ma tego w tabeli
+
+                // KLUCZOWE: Zapisujemy ID Trenera. Jeœli jest 0, to znaczy ¿e w bazie jest 0.
+                Preferences.Set("LoggedUserCoachId", zawodnik.TrenerID);
 
                 // Przejœcie do g³ównego ekranu
-                // U¿ywamy "///" aby wyczyœciæ stos nawigacji
                 await Shell.Current.GoToAsync("//MainPage");
             }
             else
@@ -57,7 +61,6 @@ public partial class LoginPage : ContentPage
         }
     }
 
-    // ZMIANA: Zmieniono TappedEventArgs na EventArgs, co naprawia b³¹d sygnatury
     private async void OnForgotPasswordTapped(object sender, EventArgs e)
     {
         await DisplayAlert("Info", "Skontaktuj siê z trenerem w celu resetu has³a.", "OK");

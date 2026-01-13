@@ -26,33 +26,42 @@ public partial class MessagesPage : ContentPage
 
     private async Task LoadMessages()
     {
-        // Pobierz ID zalogowanego u¿ytkownika
+        // Pobieramy ID zalogowanego gracza
         int playerId = Preferences.Get("LoggedUserId", 0);
 
         if (playerId == 0)
         {
-            await DisplayAlert("B³¹d", "Nie znaleziono zalogowanego u¿ytkownika.", "OK");
+            await DisplayAlert("B³¹d", "Brak zalogowanego u¿ytkownika.", "OK");
             return;
         }
 
-        LoadingIndicator.IsVisible = true;
-        LoadingIndicator.IsRunning = true;
-        MessagesCollectionView.IsVisible = false;
+        // Kontrolki ³adowania (upewnij siê, ¿e masz je w XAML: LoadingIndicator i MessagesCollectionView)
+        if (LoadingIndicator != null)
+        {
+            LoadingIndicator.IsRunning = true;
+            LoadingIndicator.IsVisible = true;
+        }
 
         try
         {
+            // Pobranie danych z bazy
             var messages = await _databaseService.GetMessagesForPlayerAsync(playerId);
+
+            // Przypisanie do listy
             MessagesCollectionView.ItemsSource = messages;
         }
         catch (Exception ex)
         {
+            System.Diagnostics.Debug.WriteLine($"Error fetching messages: {ex.Message}");
             await DisplayAlert("B³¹d", "Nie uda³o siê pobraæ wiadomoœci.", "OK");
         }
         finally
         {
-            LoadingIndicator.IsRunning = false;
-            LoadingIndicator.IsVisible = false;
-            MessagesCollectionView.IsVisible = true;
+            if (LoadingIndicator != null)
+            {
+                LoadingIndicator.IsRunning = false;
+                LoadingIndicator.IsVisible = false;
+            }
         }
     }
 }

@@ -20,10 +20,11 @@
             </VerticalStackLayout>
 
             <Grid Grid.Row="1" ColumnDefinitions="*, *" ColumnSpacing="15">
+
                 <Border Grid.Column="0"
                         BackgroundColor="{StaticResource CardBackground}"
-                        Stroke="{StaticResource ActiveBorder}"
-                        StrokeThickness="2"
+                        Stroke="{StaticResource CardBorder}"
+                        StrokeThickness="1"
                         StrokeShape="RoundRectangle 10"
                         Padding="10"
                         HeightRequest="120">
@@ -32,7 +33,7 @@
                                TextColor="{StaticResource TextSecondary}" 
                                FontAttributes="Bold" 
                                HorizontalOptions="Center"/>
-                        <Label Text="✉" FontSize="40" TextColor="{StaticResource TextAccent}" HorizontalOptions="Center"/>
+                        <Image Source="dotnet_bot.png" HeightRequest="40" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnMessagesTapped"/>
@@ -41,8 +42,8 @@
 
                 <Border Grid.Column="1"
                         BackgroundColor="{StaticResource CardBackground}"
-                        Stroke="{StaticResource ActiveBorder}"
-                        StrokeThickness="2"
+                        Stroke="{StaticResource CardBorder}"
+                        StrokeThickness="1"
                         StrokeShape="RoundRectangle 10"
                         Padding="10"
                         HeightRequest="120">
@@ -51,8 +52,11 @@
                                TextColor="{StaticResource TextSecondary}" 
                                FontAttributes="Bold" 
                                HorizontalOptions="Center"/>
-                        <Label Text="📅" FontSize="40" TextColor="{StaticResource TextAccent}" HorizontalOptions="Center"/>
+                        <Image Source="dotnet_bot.png" HeightRequest="40" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnCalendarTapped"/>
+                    </Border.GestureRecognizers>
                 </Border>
             </Grid>
 
@@ -69,7 +73,8 @@
                            HorizontalOptions="Center"/>
 
                     <Grid ColumnDefinitions="*, Auto, *" RowDefinitions="Auto, Auto">
-                        <Label Grid.Column="0" Text="FC Orły" 
+                        <Label x:Name="HomeTeamLabel"
+                               Text="FC Orły" 
                                TextColor="{StaticResource TextPrimary}" 
                                FontAttributes="Bold" 
                                FontSize="16"
@@ -80,14 +85,16 @@
                                FontAttributes="Bold"
                                HorizontalOptions="Center"/>
 
-                        <Label Grid.Column="2" Text="Grom" 
+                        <Label x:Name="AwayTeamLabel"
+                               Text="---" 
                                TextColor="{StaticResource TextPrimary}" 
                                FontAttributes="Bold" 
                                FontSize="16"
                                HorizontalOptions="Center"/>
 
-                        <Label Grid.Row="1" Grid.ColumnSpan="3"
-                               Text="Sobota, 14:00" 
+                        <Label x:Name="MatchDateLabel"
+                               Grid.Row="1" Grid.ColumnSpan="3"
+                               Text="Brak nadchodzących spotkań" 
                                TextColor="{StaticResource TextSecondary}" 
                                HorizontalOptions="Center" 
                                FontSize="14"
@@ -96,7 +103,8 @@
 
                     <BoxView HeightRequest="1" Color="{StaticResource CardBorder}" Margin="0,5"/>
 
-                    <Label Text="Stadion Miejski, ul. Sportowa 1" 
+                    <Label x:Name="MatchLocationLabel"
+                           Text="" 
                            TextColor="{StaticResource TextMuted}" 
                            FontSize="12" 
                            HorizontalOptions="Center"/>

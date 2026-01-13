@@ -8,17 +8,20 @@ namespace SoccerLinkPlayer.Models
 {
     public class Wydarzenie
     {
-        public int WydarzenieID { get; set; } // Klucz główny
+        public int WydarzenieID { get; set; }
         public string Nazwa { get; set; }
         public string Miejsce { get; set; }
-        public string Data { get; set; } // Przechowywane jako tekst w bazie (opcjonalne, jeśli używamy DataRozpoczecia)
-        public DateTime DataRozpoczecia { get; set; }
-        public DateTime DataZakonczenia { get; set; }
+
+        // ZMIANA: Pola odpowiadające kolumnom w Twojej bazie (tekstowe)
+        public string Data { get; set; }                // np. "15.05.2024"
+        public string GodzinaRozpoczecia { get; set; }  // np. "14:00"
+        public string GodzinaZakonczenia { get; set; }  // np. "16:00"
+
         public string Opis { get; set; }
         public int TrenerID { get; set; }
 
-        // Właściwości pomocnicze do wyświetlania w widokach (nie są w bazie, ale ułatwiają bindowanie)
-        public string DataDisplay => DataRozpoczecia.ToString("dd.MM.yyyy");
-        public string GodzinaRangeDisplay => $"{DataRozpoczecia:HH:mm} - {DataZakonczenia:HH:mm}";
+        // Właściwości pomocnicze do wyświetlania
+        public string DataDisplay => Data;
+        public string GodzinaRangeDisplay => $"{GodzinaRozpoczecia} - {GodzinaZakonczenia}";
     }
 }
