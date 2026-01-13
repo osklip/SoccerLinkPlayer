@@ -4,61 +4,93 @@
              x:Class="SoccerLinkPlayer.LoginPage"
              Title="Logowanie"
              Shell.NavBarIsVisible="False"
-             BackgroundColor="{StaticResource White}">
+             BackgroundColor="{StaticResource AppBackground}">
 
     <ScrollView>
-        <VerticalStackLayout Spacing="20" Padding="30" VerticalOptions="Center">
+        <Grid VerticalOptions="FillAndExpand" Padding="30">
+            <Border BackgroundColor="{StaticResource LoginCardBackground}"
+                    Stroke="{StaticResource LoginCardBackground}"
+                    StrokeShape="RoundRectangle 16"
+                    VerticalOptions="Center"
+                    Padding="28">
 
-            <Label Text="SoccerLink Player"
-                   FontSize="32"
-                   FontAttributes="Bold"
-                   TextColor="{StaticResource Primary}"
-                   HorizontalOptions="Center"
-                   Margin="0,50,0,30"/>
+                <VerticalStackLayout Spacing="18">
+                    <Label Text="Logowanie"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource LoginTextHeader}"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"/>
 
-            <Frame BorderColor="{StaticResource Gray200}"
-                   Padding="0"
-                   CornerRadius="8"
-                   HasShadow="False">
-                <Entry x:Name="EmailEntry"
-                       Placeholder="Adres e-mail"
-                       Keyboard="Email"
-                       Margin="10,0"
-                       TextColor="{StaticResource Black}"
-                       PlaceholderColor="{StaticResource Gray400}"/>
-            </Frame>
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Adres email" 
+                               TextColor="{StaticResource LoginTextHeader}" 
+                               FontAttributes="Bold" 
+                               FontSize="13"/>
 
-            <Frame BorderColor="{StaticResource Gray200}"
-                   Padding="0"
-                   CornerRadius="8"
-                   HasShadow="False">
-                <Entry x:Name="PasswordEntry"
-                       Placeholder="Hasło"
-                       IsPassword="True"
-                       Margin="10,0"
-                       TextColor="{StaticResource Black}"
-                       PlaceholderColor="{StaticResource Gray400}"/>
-            </Frame>
+                        <Border BackgroundColor="{StaticResource LoginInputContainer}"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="1">
+                            <Entry x:Name="EmailEntry"
+                                   Placeholder="email@przyklad.com"
+                                   PlaceholderColor="{StaticResource Gray600}"
+                                   TextColor="Black"
+                                   BackgroundColor="{StaticResource LoginInputBackground}"
+                                   FontAttributes="Bold"
+                                   Keyboard="Email"/>
+                        </Border>
+                    </VerticalStackLayout>
 
-            <Button x:Name="LoginButton"
-                    Text="ZALOGUJ SIĘ"
-                    BackgroundColor="{StaticResource Primary}"
-                    TextColor="{StaticResource White}"
-                    CornerRadius="25"
-                    HeightRequest="50"
-                    FontAttributes="Bold"
-                    Margin="0,20,0,0"
-                    Clicked="OnLoginClicked"/>
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Hasło" 
+                               TextColor="{StaticResource LoginTextHeader}" 
+                               FontAttributes="Bold" 
+                               FontSize="13"/>
 
-            <Label Text="Zapomniałeś hasła?"
-                   TextColor="{StaticResource Gray500}"
-                   HorizontalOptions="Center"
-                   TextDecorations="Underline">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnForgotPasswordTapped"/>
-                </Label.GestureRecognizers>
-            </Label>
+                        <Border BackgroundColor="{StaticResource LoginInputContainer}"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="1">
+                            <Entry x:Name="PasswordEntry"
+                                   Placeholder="Hasło"
+                                   PlaceholderColor="{StaticResource Gray600}"
+                                   TextColor="Black"
+                                   IsPassword="True"
+                                   BackgroundColor="{StaticResource LoginInputBackground}"
+                                   FontAttributes="Bold"/>
+                        </Border>
+                    </VerticalStackLayout>
 
-        </VerticalStackLayout>
+                    <Button x:Name="LoginButton"
+                            Text="Zaloguj się"
+                            TextColor="{StaticResource LoginButtonText}"
+                            BackgroundColor="{StaticResource LoginInputBackground}"
+                            FontAttributes="Bold"
+                            CornerRadius="10"
+                            HeightRequest="44"
+                            Margin="0,10,0,0"
+                            Clicked="OnLoginClicked"/>
+
+                    <VerticalStackLayout Spacing="6" Margin="0,6,0,0">
+                        <Label Text="Nie masz konta?"
+                               TextColor="{StaticResource LoginTextHeader}"
+                               FontSize="13"
+                               HorizontalOptions="Center"/>
+
+                        <Button Text="Zarejestruj się"
+                                TextColor="{StaticResource LoginButtonText}"
+                                BackgroundColor="{StaticResource LoginInputBackground}"
+                                FontAttributes="Bold"
+                                CornerRadius="8"
+                                HeightRequest="36"
+                                WidthRequest="160"
+                                HorizontalOptions="Center"
+                                Clicked="OnForgotPasswordTapped"/>
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
     </ScrollView>
 </ContentPage>

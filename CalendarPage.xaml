@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:SoccerLinkPlayer.Models"
+             x:Class="SoccerLinkPlayer.CalendarPage"
+             Title="Kalendarz"
+             BackgroundColor="{StaticResource AppBackground}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Odśwież" Clicked="OnRefreshClicked" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto, *">
+        <Label Grid.Row="0" 
+               Text="Nadchodzące wydarzenia" 
+               TextColor="{StaticResource TextMuted}" 
+               FontSize="14" 
+               FontAttributes="Bold"
+               Margin="20,20,20,10"/>
+
+        <CollectionView Grid.Row="1" 
+                        x:Name="EventsCollectionView" 
+                        Margin="15,0,15,0"
+                        SelectionMode="None">
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10">
+                    <Label Text="📅" FontSize="40" HorizontalOptions="Center"/>
+                    <Label Text="Brak zaplanowanych wydarzeń." 
+                           TextColor="{StaticResource TextMuted}" 
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ElementKalendarza">
+                    <Border Stroke="{StaticResource CardBorder}"
+                            StrokeShape="RoundRectangle 10"
+                            BackgroundColor="{StaticResource CardBackground}"
+                            Padding="0"
+                            Margin="0,0,0,10">
+
+                        <Grid ColumnDefinitions="70, *, Auto">
+
+                            <Border Grid.Column="0" 
+                                    BackgroundColor="{StaticResource CardBorder}" 
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 10,0,0,10">
+                                <VerticalStackLayout VerticalOptions="Center" Spacing="0">
+                                    <Label Text="{Binding Data, StringFormat='{0:dd}'}" 
+                                           FontSize="26" 
+                                           FontAttributes="Bold" 
+                                           TextColor="{StaticResource TextPrimary}" 
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="{Binding Data, StringFormat='{0:MMM}'}" 
+                                           FontSize="14" 
+                                           FontAttributes="Bold"
+                                           TextColor="{StaticResource TextSecondary}" 
+                                           HorizontalOptions="Center"
+                                           TextTransform="Uppercase"/>
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" 
+                                                 Padding="12" 
+                                                 Spacing="4" 
+                                                 VerticalOptions="Center">
+
+                                <Label Text="{Binding Tytul}" 
+                                       FontSize="16" 
+                                       FontAttributes="Bold" 
+                                       TextColor="{StaticResource TextPrimary}"
+                                       LineBreakMode="TailTruncation"/>
+
+                                <Label Text="{Binding Podtytul}" 
+                                       FontSize="13" 
+                                       TextColor="{StaticResource TextMuted}"
+                                       LineBreakMode="TailTruncation"/>
+
+                                <Label Text="{Binding GodzinaDisplay}" 
+                                       FontSize="12" 
+                                       TextColor="{StaticResource TextSecondary}"
+                                       FontAttributes="Italic"/>
+                            </VerticalStackLayout>
+
+                            <Border Grid.Column="1" Grid.ColumnSpan="2"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Start"
+                                    BackgroundColor="{Binding KolorTypu}"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 0,10,0,10"
+                                    Padding="10,4"
+                                    Margin="0">
+                                <Label Text="{Binding Typ}" 
+                                       FontSize="10" 
+                                       FontAttributes="Bold" 
+                                       TextColor="White"/>
+                            </Border>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <ActivityIndicator Grid.Row="1" 
+                           x:Name="LoadingIndicator" 
+                           IsRunning="False" 
+                           IsVisible="False" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"
+                           Color="{StaticResource TextAccent}"/>
+    </Grid>
+</ContentPage>

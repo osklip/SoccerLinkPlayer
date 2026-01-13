@@ -23,6 +23,7 @@ namespace SoccerLinkPlayer
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<MessagesPage>();
+            builder.Services.AddTransient<CalendarPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();

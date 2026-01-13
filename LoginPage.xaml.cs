@@ -38,7 +38,8 @@ public partial class LoginPage : ContentPage
                 Preferences.Set("LoggedUserTeam", "FC Or³y"); // Przyk³adowo, jeœli nie ma tego w tabeli
 
                 // Przejœcie do g³ównego ekranu
-                await Shell.Current.GoToAsync($"//MainPage");
+                // U¿ywamy "///" aby wyczyœciæ stos nawigacji
+                await Shell.Current.GoToAsync("//MainPage");
             }
             else
             {
@@ -56,7 +57,8 @@ public partial class LoginPage : ContentPage
         }
     }
 
-    private async void OnForgotPasswordTapped(object sender, TappedEventArgs e)
+    // ZMIANA: Zmieniono TappedEventArgs na EventArgs, co naprawia b³¹d sygnatury
+    private async void OnForgotPasswordTapped(object sender, EventArgs e)
     {
         await DisplayAlert("Info", "Skontaktuj siê z trenerem w celu resetu has³a.", "OK");
     }
